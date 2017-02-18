@@ -1,5 +1,5 @@
 const AppSettings = {
-  appTitle: 'Example Application',
+  appTitle: 'Karaman',
   apiUrl: '/api/v1'
 };
 

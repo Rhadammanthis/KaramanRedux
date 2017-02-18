@@ -1,9 +1,12 @@
 import angular from 'angular';
+import ngMaterial from 'angular-material';
+import ngCookies from 'angular-cookies';
+import ngRoute from 'angular-route';
 
 // angular modules
 import constants from './constants';
-import onConfig  from './on_config';
-import onRun     from './on_run';
+import onConfig from './on_config';
+import onRun from './on_run';
 import 'angular-ui-router';
 import './templates';
 import './filters';
@@ -13,6 +16,9 @@ import './directives';
 
 // create and bootstrap application
 const requires = [
+  ngMaterial,
+  ngCookies,
+  ngRoute,
   'ui.router',
   'templates',
   'app.filters',

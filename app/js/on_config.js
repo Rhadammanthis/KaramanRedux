@@ -11,11 +11,11 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   });
 
   $stateProvider
-  .state('Home', {
+  .state('Login', {
     url: '/',
-    controller: 'ExampleCtrl as home',
-    templateUrl: 'home.html',
-    title: 'Home'
+    controller: 'LoginCtrl as login',
+    templateUrl: 'login.html',
+    title: 'Login'
   });
 
   $urlRouterProvider.otherwise('/');
