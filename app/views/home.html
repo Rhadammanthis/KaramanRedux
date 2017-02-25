@@ -1,10 +1,56 @@
-<h1 class="heading -large">{{ home.title | ExampleFilter }}</h1>
+<div>
+    <md-toolbar class="grey">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="home.openSideNav()">
+                <i class="material-icons md-48">menu</i>
+            </md-button>
+            <h1>
+                <span>Karaman</span>
+            </h1>
+            <span flex></span>
+            <md-button ng-click="home.newPatient()">Agregar nuevo</md-button>
+        </div>
+    </md-toolbar>
+    <md-sidenav class="md-sidenav-left md-whiteframe-6dp" md-component-id='left'>
+        <md-toolbar class="md-theme-light">
+            <h1 class=md-toolbar-tools> Men&uacute;</h1>
+            <md-content flex>
+                <div layout="column">
+                    <md-button class='no-padding md-primary' ng-click='nav.logOut()' target='_self' style='color: #000'> Cerrar sesión
+                    </md-button>
+                </div>
+            </md-content>
+        </md-toolbar>
+    </md-sidenav>
+    <div layout="row" layout-align="start start">
+    </div>
+    <div>
+        <md-table-container>
+            <table md-table md-row-select multiple ng-model="home.selected" multiple="true" md-row-select="true" md-progress="home.promise">
+                <thead md-head md-order="home.query.order" md-on-reorder="getDesserts">
+                    <tr md-row>
+                        <th md-column><span>Nombre</span></th>
+                        <th md-column><span>Apellido Paterno</span></th>
+                        <th md-column><span>Apellido Materno</span></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-select="home.patient" ng-click="home.patientSelected(patient)" md-row-select="true" md-auto-select ng-repeat="patient in home.list | orderBy: home.order | filter:buscar ">
+                        <td md-cell>
+                            {{patient.name}}
+                        </td>
+                        <td md-cell>
+                            {{patient.parentalLastName}}
+                        </td>
+                        <td md-cell>
+                            {{patient.maternalLastName}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
 
-<h3 class="heading -medium">Here is a fancy number served up courtesy of Angular: <span class="number-example">{{ home.number }}</span></h3>
-
-<img src="images/angular.png" height="100" />
-<img src="images/gulp.png" height="100" />
-<img src="images/browserify.png" height="100" />
-
-<hr/>
-<div example-directive title="WOW!" click-message="You clicked me!">Directive is not loaded.</div>
+        <md-table-pagination md-limit="home.query.limit" md-limit-options="[5, 10, 15]" md-page="home.query.page" md-total="{{home.list.length}}"
+            md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+    </div>
+</div>

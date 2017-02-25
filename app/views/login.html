@@ -1,3 +1,50 @@
-Login
+<div style="height: 100%;" layout="column" layout-align="center center">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>
+				<span>Karaman</span>
+			</h2>
+		</div>
+	</md-toolbar>
 
-<md-button class="md-raised md-primary" ng-click="">Sign in with Google</md-button>
+    <md-card id=card_login_registro md-whiteframe='5'>
+
+        <md-card-content id=card_login_container>
+            <form ng-submit='login.atemptLogin($event)' name="formregistro">
+
+                <div layout="row" layout-xs="column">
+                    <div flex="100">
+                        <div flex="95">
+                            <md-input-container class=md-block flex-gt-sm='' flex>
+                                <label> Correo </label>
+                                <input id=inputNom name='nombre' type='text' required autofocus ng-model='login.userData.email'>
+                                <div ng-messages="formregistro.nombre.$error">
+                                    <div ng-message="required" ng-show="formregistro.nombre.$invalid">Field is not optional</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class=md-block flex-gt-sm=''>
+                                <label> Contraseña </label>
+                                <input id=inputPasswordUsrR name='claveUsR' type='password' required ng-model='login.userData.password'>
+                                <div ng-messages="formregistro.claveUsR.$error">
+                                    <div ng-message="required" ng-show="formregistro.claveUsR.$invalid">Field is not optional</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div layout="row" layout-xs="column">
+
+                    <div flex="100">
+                        <div>
+                            <md-button class="md-primary" type='submit' ng-disabled="formregistro.$invalid"> Iniciar sesión </md-button>
+                        </div>
+                    </div>
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="login.attemptingLogIn">
+                        <md-progress-circular md-diameter="20px" md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

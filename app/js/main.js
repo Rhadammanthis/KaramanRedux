@@ -2,6 +2,7 @@ import angular from 'angular';
 import ngMaterial from 'angular-material';
 import ngCookies from 'angular-cookies';
 import ngRoute from 'angular-route';
+import ngTable from 'angular-material-data-table';
 
 // angular modules
 import constants from './constants';
@@ -19,6 +20,7 @@ const requires = [
   ngMaterial,
   ngCookies,
   ngRoute,
+  ngTable,
   'ui.router',
   'templates',
   'app.filters',

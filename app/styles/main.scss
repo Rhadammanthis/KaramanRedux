@@ -5,5 +5,28 @@ body {
   font-family: Helvetica, sans-serif;
   color: $font-color--dark;
   background-color: $background--light;
-  padding: $half-space;
+}
+
+#card_login_registro{
+  margin-left: auto;
+  margin-right: auto;
+  width : 40% !important;
+  min-width: 281px;
+}
+
+#card_login_container{
+  padding: 20px;
+}
+
+.md-dialog-container{
+position:fixed;
+top:0 !important;
+overflow:hidden;
+}
+
+.info-container{
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid #BDBDBD;
 }

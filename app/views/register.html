@@ -1,0 +1,110 @@
+<div layout="column" ng-cloak class="md-inline-form">
+    <md-toolbar class="grey">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="register.goBack()">
+                <i class="material-icons md-48">arrow_back</i>
+            </md-button>
+            <h1>
+                <span>Registrar Nuevo Paciente</span>
+            </h1>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <div>
+            <form ng-submit='register.registerNewPatient()' name="userForm">
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Nombre(s)</label>
+                        <input required ng-model="register.patient.name">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Apellido Paterno</label>
+                        <input required ng-model="register.patient.parentalLastName">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Apellido Materno</label>
+                        <input ng-model="register.patient.maternalLastName">
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container flex="50">
+                        <label>Fecha de Nacimineto</label>
+                        <md-datepicker required ng-model="register.dateOfBirth"></md-datepicker>
+                    </md-input-container>
+
+                    <md-radio-group required ng-model="register.patient.sex" flex="50">
+                        <md-radio-button class="md-primary" value="hombre"> Hombre </md-radio-button>
+                        <md-radio-button class="md-primary" value="mujer">Mujer</md-radio-button>
+                    </md-radio-group>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Nomber del Padre</label>
+                        <input required ng-model="register.patient.fatherName">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Nombre de la Madre</label>
+                        <input required ng-model="register.patient.motherName">
+                    </md-input-container>
+                </div>
+
+                <md-input-container class="md-block">
+                    <label>Calle</label>
+                    <input required ng-model="register.patient.street">
+                </md-input-container>
+
+                <md-input-container md-no-float class="md-block">
+                    <label>Colonia</label>
+                    <input required ng-model="register.patient.neighborhood">
+                </md-input-container>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Municipio</label>
+                        <input required ng-model="register.patient.municipality">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Estado</label>
+                        <md-select ng-model="register.patient.state">
+                            <md-option required ng-repeat="state in register.states" value="{{state.abbrev}}">
+                                {{state.abbrev}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Código Postal</label>
+                        <input name="postalCode" ng-model="register.patient.postalCode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                            <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                            <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                            </div>
+                            <div ng-message="md-maxlength" class="my-message">
+                                Don't use the long version silly...we don't need to be that specific...
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <div flex="35">
+                    </div>
+                    <md-button type='submit' flex-gt-sm="30" flex class="md-raised md-primary">Agregar Nuevo Paciente</md-button>
+                    <div flex="35">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </md-content>
+
+</div>
+Register {{register.number}}
