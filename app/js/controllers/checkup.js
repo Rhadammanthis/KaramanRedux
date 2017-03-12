@@ -6,9 +6,6 @@ function CheckupCtrl($firebase, $alert, $q, $cookies, $location) {
   // ViewModel
   const vm = this;
 
-  vm.title = 'AngularJS, Gulp, and Browserify! Written with keyboards and love!';
-  vm.number = 1234;
-
   vm.patients;
   vm.patient = null;
   vm.todaysDate;

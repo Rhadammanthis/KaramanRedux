@@ -10,6 +10,10 @@
             <md-tooltip md-direction="bottom">Guardar</md-tooltip>
             <i class="material-icons md-48">save</i>
         </md-button>
+        <md-button class="md-icon-button" aria-label="Imprimir" ng-click="prescription.print()">
+            <md-tooltip md-direction="bottom">Imprimir</md-tooltip>
+            <i class="material-icons md-48">print</i>
+        </md-button>
     </div>
 </md-toolbar>
 <md-content layout-padding>
@@ -17,7 +21,7 @@
         <md-card class="md-whiteframe-5dp" flex="100" flex-gt-sm="65">
             <md-card-content>
                 <md-input-container style="overflow-x: hidden; overflow-y: scroll; height: 850px; " class="md-block">
-                    <textarea ng-model="prescription.content" rows="48"></textarea>
+                    <textarea id="prescription-body" ng-model="prescription.content" rows="48"></textarea>
                 </md-input-container>
             </md-card-content>
         </md-card>
@@ -54,7 +58,8 @@
                         </table>
                     </md-table-container>
 
-                    <md-table-pagination md-limit="5" md-page="prescription.pageM" md-total="8" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
+                    <md-table-pagination md-limit="5" md-page="prescription.pageM" md-total="8" md-page-select="true" md-boundary-links="false"
+                        md-on-paginate="logPagination"></md-table-pagination>
                 </md-card-content>
             </md-card>
 
@@ -76,20 +81,20 @@
                             </thead>
 
                             <tbody md-body>
-                                <tr md-row md-select="med" md-auto-select="true" md-row-select="false" ng-click="prescription.addToPrescription(med)"
-                                    ng-repeat="med in prescription.data.meds | limitTo: 5 : (prescription.pageF -1) * 5">
+                                <tr md-row md-select="med" md-auto-select="true" md-row-select="false" ng-click="prescription.addToPrescription(med)" ng-repeat="med in prescription.data.meds | limitTo: 5 : (prescription.pageF -1) * 5">
                                     <td md-cell>
                                         {{med.name}}
                                     </td>
                                     <td md-cell>
                                         {{med.dosage}}
                                     </td>
-                                    </tr>
+                                </tr>
                             </tbody>
                         </table>
                     </md-table-container>
 
-                    <md-table-pagination md-limit="5" md-page="prescription.pageF" md-total="5" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
+                    <md-table-pagination md-limit="5" md-page="prescription.pageF" md-total="5" md-page-select="true" md-boundary-links="false"
+                        md-on-paginate="logPagination"></md-table-pagination>
                 </md-card-content>
             </md-card>
         </div>

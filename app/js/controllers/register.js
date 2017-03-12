@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-
 function RegisterPatientCtrl($alert, $location, $firebase) {
   'ngInject';
 
@@ -23,9 +21,9 @@ function RegisterPatientCtrl($alert, $location, $firebase) {
 
   vm.registerNewPatient = () => {
     vm.patient.dateOfBirth = vm.dateOfBirth.getTime();
-    firebase.auth().onAuthStateChanged(function (user) {
+    $firebase.other.auth().onAuthStateChanged(function (user) {
       if (user) {
-        firebase.database().ref(`/users/${user.uid}/patients`)
+        $firebase.other.database().ref(`/users/${user.uid}/patients`)
           .push(vm.patient)
           .then(() => {
             $alert.show("Se ha agregado al nuevo paciente exitosamente");

@@ -1,4 +1,4 @@
-function PrescriptionCtrl($alert, $cookies, $location, $firebase) {
+function PrescriptionCtrl($alert, $cookies, $location, $firebase, $printer) {
   'ngInject';
 
   // ViewModel
@@ -22,7 +22,7 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase) {
     //Init Firebase app
     $firebase.start();
 
-    if($cookies.get('prescription'))
+    if ($cookies.get('prescription'))
       vm.content = $cookies.get('prescription');
 
     vm.data = {
@@ -100,6 +100,30 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase) {
     $cookies.put('prescription', vm.content);
     $alert.show('Receta guardada correctamente');
   }
+
+  vm.print = () => {
+
+    var prescription = {};
+    prescription.doctor = {};
+    prescription.doctor.name = "Dr. Stephen Strange";
+    prescription.doctor.address = "Rocky Rd 1430, Jacksonville GA, 30044";
+    prescription.doctor.telephone = "+16789003060"
+    prescription.patient = {};
+    prescription.patient.name = "Hugo Obette Medina Marmolejo"
+    prescription.patient.meds = [];
+    var medOne = {};
+    medOne.name = "Prozac and then some other";
+    medOne.description = "Take just on pill every other weekend day and month"
+    prescription.patient.meds.push(medOne)
+    var medTwo = {};
+    medTwo.name = "Advil from hell 666";
+    medTwo.description = "Whatever it is you fell you might need. I dont know man, I'm not a doctor"
+    prescription.patient.meds.push(medTwo)
+
+    $printer.print(prescription);
+  }
+
+
 
 }
 
