@@ -3,6 +3,7 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase, $printer) {
 
   // ViewModel
   const vm = this;
+  var medsAndTreatments = []
 
   vm.title = 'AngularJS, Gulp, and Browserify! Written with keyboards and love!';
   vm.number = 1234;
@@ -22,8 +23,16 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase, $printer) {
     //Init Firebase app
     $firebase.start();
 
-    if ($cookies.get('prescription'))
-      vm.content = $cookies.get('prescription');
+    // $cookies.remove('prescription')
+
+    if ($cookies.get('prescription')) {
+      medsAndTreatments = JSON.parse($cookies.get('prescription'));
+
+      for (var i = 0; i < medsAndTreatments.length; i++) {
+        vm.content += medsAndTreatments[i].name + '\n' + medsAndTreatments[i].body + '\n\n'
+      }
+    }
+
 
     vm.data = {
       "count": 8,
@@ -89,6 +98,12 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase, $printer) {
 
   vm.addToPrescription = (item) => {
     console.log(item)
+    var medOrTreatment = {}
+    medOrTreatment.name = item.name
+    medOrTreatment.description = item.body
+
+    medsAndTreatments.push(medOrTreatment)
+
     vm.content += item.name + '\n' + item.body + '\n\n'
   }
 
@@ -97,28 +112,28 @@ function PrescriptionCtrl($alert, $cookies, $location, $firebase, $printer) {
   }
 
   vm.onSavePressed = () => {
-    $cookies.put('prescription', vm.content);
+    $cookies.put('prescription', JSON.stringify(medsAndTreatments));
     $alert.show('Receta guardada correctamente');
   }
 
   vm.print = () => {
 
+    var medicData, patient;
+
+    if ($cookies.get('medicData'))
+      medicData = JSON.parse($cookies.get('medicData'));
+
+    if ($cookies.get('patient'))
+      patient = JSON.parse($cookies.get('patient'));
+
     var prescription = {};
     prescription.doctor = {};
-    prescription.doctor.name = "Dr. Stephen Strange";
-    prescription.doctor.address = "Rocky Rd 1430, Jacksonville GA, 30044";
-    prescription.doctor.telephone = "+16789003060"
+    prescription.doctor.name = medicData.title + " " + medicData.name
+    prescription.doctor.address = medicData.address
+    prescription.doctor.telephone = medicData.tel.toString();
     prescription.patient = {};
-    prescription.patient.name = "Hugo Obette Medina Marmolejo"
-    prescription.patient.meds = [];
-    var medOne = {};
-    medOne.name = "Prozac and then some other";
-    medOne.description = "Take just on pill every other weekend day and month"
-    prescription.patient.meds.push(medOne)
-    var medTwo = {};
-    medTwo.name = "Advil from hell 666";
-    medTwo.description = "Whatever it is you fell you might need. I dont know man, I'm not a doctor"
-    prescription.patient.meds.push(medTwo)
+    prescription.patient.name = patient.name + " " + patient.parentalLastName + " " + patient.maternalLastName
+    prescription.patient.meds = medsAndTreatments
 
     $printer.print(prescription);
   }

@@ -26,7 +26,8 @@ function HomeCtrl($location, $q, ConsoleService, $alert, $mdSidenav, $firebase, 
     $firebase.other.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
-        console.log(user)
+        medicDataLocalInstance(user);
+
         vm.promise = $firebase.other.database().ref(`/users/${user.uid}/patients`)
           .once('value').then(snapshot => {
             console.log(snapshot.val())
@@ -36,8 +37,6 @@ function HomeCtrl($location, $q, ConsoleService, $alert, $mdSidenav, $firebase, 
               return newVal;
             });
             // _this._setTotal(_this._lista.length);
-            console.log('in TablaBase');
-            console.log(vm.list);
             deferred.resolve(123);
           });
       } else {
@@ -64,8 +63,20 @@ function HomeCtrl($location, $q, ConsoleService, $alert, $mdSidenav, $firebase, 
   }
 
   vm.logOut = () => {
-    firebase.auth().signOut();
+    $firebase.other.auth().signOut();
     $location.path('/');
+  }
+
+  vm.settings = () => {
+    $location.path('/settings');
+  }
+
+  var medicDataLocalInstance = (user) => {
+    $firebase.other.database().ref(`/users/${user.uid}/medicData`)
+      .once('value').then(snapshot => {
+        console.log(snapshot.val())
+        $cookies.put('medicData', JSON.stringify(snapshot.val()));
+      });
   }
 
 }

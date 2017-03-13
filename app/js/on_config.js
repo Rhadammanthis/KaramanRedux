@@ -58,6 +58,14 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       title: 'Receta'
     });
 
+  $stateProvider
+    .state('Configuración', {
+      url: '/settings',
+      controller: 'SettingsCtrl as settings',
+      templateUrl: 'settings.html',
+      title: 'Configuración'
+    });
+
   $urlRouterProvider.otherwise('/');
 
   $mdThemingProvider.theme('default')

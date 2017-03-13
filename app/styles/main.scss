@@ -1,10 +1,27 @@
 @import 'vars';
 @import 'typography';
+@import 'materialtable';
 
 body {
   font-family: Helvetica, sans-serif;
   color: $font-color--dark;
   background-color: $background--light;
+  height: 100%;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #card_login_registro{
