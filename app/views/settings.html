@@ -1,4 +1,4 @@
-<md-toolbar class="grey">
+<md-toolbar class="md-whiteframe-3dp">
     <div class="md-toolbar-tools">
         <md-button ng-show="settings.showNavItems" class="md-icon-button" aria-label="Settings" ng-click="settings.openSideNav()">
             <i class="material-icons md-48">menu</i>
@@ -7,64 +7,119 @@
             <span>Configuración</span>
         </h1>
         <md-button ng-show="settings.showNavItems" class="md-icon-button" aria-label="Imprimir" ng-click="settings.goHome()">
-            <md-tooltip md-direction="bottom">Ir a inicio</md-tooltip>
-            <i class="material-icons md-48">home</i>
+            <md-tooltip md-direction="bottom">Guardar Cambios</md-tooltip>
+            <i class="material-icons md-48">save</i>
         </md-button>
     </div>
 </md-toolbar>
-<md-sidenav class="md-sidenav-left md-whiteframe-6dp" md-component-id='left'>
-    <md-toolbar class="md-theme-light">
-        <h1 class=md-toolbar-tools> Men&uacute;</h1>
-        <md-content flex>
-            <div layout="column">
-                <md-button class='no-padding md-primary' ng-click='nav.logOut()' target='_self' style='color: #000'> Cerrar sesión
-                </md-button>
-            </div>
-        </md-content>
-        <md-content flex>
-            <div layout="column">
-                <md-button class='no-padding md-primary' ng-click='nav.settings()' target='_self' style='color: #000'> Configuración
-                </md-button>
-            </div>
-        </md-content>
-    </md-toolbar>
-</md-sidenav>
-<div layout="column" layout-align="center center">
-    <div layout="row" layout-align="center center">
-        <div flex="80">
-            <form ng-submit='settings.registerMedicData()' name="medicForm">
+<md-conten flex>
+    <md-sidenav class="md-sidenav-left md-whiteframe-6dp" md-component-id='left'>
+        <md-toolbar class="md-theme-light">
+            <h1 class=md-toolbar-tools> Men&uacute;</h1>
+            <div flex>
                 <div layout="column">
-                    <div style="margin-top: 30px;" layout="row" layout-align="center center">
-                        <span style="font-size: 30px;">¡Bienvenido a Karaman!</span>
-                    </div>
-                    <span style="margin-top: 30px;"> 
+                    <md-button class='no-padding md-primary' ng-click='nav.logOut()' target='_self' style='color: #000'> Cerrar sesión
+                    </md-button>
+                </div>
+            </div>
+        </md-toolbar>
+    </md-sidenav>
+    <div ng-hide="settings.showNavItems" layout="column" layout-align="center center">
+        <div layout="row" layout-align="center center">
+            <div flex="80">
+                <form ng-submit='settings.registerMedicData()' name="medicForm">
+                    <div layout="column">
+                        <div style="margin-top: 30px;" layout="row" layout-align="center center">
+                            <span style="font-size: 30px;">¡Bienvenido a Karaman!</span>
+                        </div>
+                        <span style="margin-top: 30px;"> 
                         Para continuar, proporciona tu información básica y presiona el botón de <strong>Continuar</strong>
                     </span>
-                    <div style="margin-top: 15px;" layout="row">
-                        <md-input-container flex="30">
-                            <label>Título</label>
-                            <md-select ng-model="settings.medicData.title">
-                                <md-option required ng-repeat="title in settings.titles" value="{{title.abbrev}}">
-                                    {{title.abbrev}}
-                                </md-option>
-                            </md-select>
+                        <div style="margin-top: 15px;" layout="row">
+                            <md-input-container flex="30">
+                                <label>Título</label>
+                                <md-select ng-model="settings.medicData.title">
+                                    <md-option required ng-repeat="title in settings.titles" value="{{title.abbrev}}">
+                                        {{title.abbrev}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="70" class="md-block" flex-gt-sm>
+                                <label>Nombre completo</label>
+                                <input required ng-model="settings.medicData.name">
+                            </md-input-container>
+                        </div>
+                        <md-input-container flex="70" class="md-block" flex-gt-sm>
+                            <label>Dirección</label>
+                            <input required ng-model="settings.medicData.address">
                         </md-input-container>
                         <md-input-container flex="70" class="md-block" flex-gt-sm>
-                            <label>Nombre completo</label>
-                            <input required ng-model="settings.medicData.name">
+                            <label>Teléfono</label>
+                            <input required type="number" ng-model="settings.medicData.tel">
                         </md-input-container>
+                        <md-button type='submit' class="md-raised md-primary">Guardar y Continuar</md-button>
                     </div>
-                    <md-input-container flex="70" class="md-block" flex-gt-sm>
-                        <label>Dirección</label>
-                        <input required ng-model="settings.medicData.address">
-                    </md-input-container>
-                    <md-input-container flex="70" class="md-block" flex-gt-sm>
-                        <label>Teléfono</label>
-                        <input required type="number" ng-model="settings.medicData.tel">
-                    </md-input-container>
-                    <md-button type='submit' class="md-raised md-primary">Guardar y Continuar</md-button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    <div ng-show="settings.showNavItems" layout="row" style="height: 90%;">
+        <div flex="20" layout="column" class="side">
+            <span style="height: 20px;"> </span>
+            <div ng-click="settings.sideNavSelected('personalData')" class="side-button" ng-class="{ 'selected': settings.sideNav.personalData === true, 'active': settings.sideNav.personalData === false  }"
+                layout="row" layout-align="start center">
+                <i style="margin-left: 15px; margin-right: 15px;" class="material-icons md-40">person</i>
+                <span style="font-weight: 600"> Datos Personales </span>
+            </div>
+            <div ng-click="settings.sideNavSelected('prescription')" class="side-button" ng-class="{ 'selected': settings.sideNav.prescription === true, 'active': settings.sideNav.prescription === false }"
+                layout="row" layout-align="start center">
+                <i style="margin-left: 15px; margin-right: 15px;" class="material-icons md-48">assignment</i>
+                <span style="font-weight: 600"> Receta Médica </span>
+            </div>
+            <div ng-click="settings.sideNavSelected('vitals')" class="side-button" ng-class="{ 'selected': settings.sideNav.vitals === true, 'active': settings.sideNav.vitals === false }"
+                layout="row" layout-align="start center">
+                <i style="margin-left: 15px; margin-right: 15px;" class="material-icons md-48">local_hospital</i>
+                <span style="font-weight: 600"> Signos Vitales </span>
+            </div>
+        </div>
+        <md-content flex="80">
+            <div ng-show="settings.sideNav.personalData">
+                LOL
+            </div>
+            <div ng-show="settings.sideNav.prescription">
+                LEL
+            </div>
+            <md-content class="reduced" ng-show="settings.sideNav.vitals">
+                <div>
+                    <!--<div class="md-whiteframe-1dp" style="width: 70%;">-->
+                        <md-table-container>
+                            <table md-table ng-model="settings.selected" md-row-select="true">
+                                <thead md-head md-order="">
+                                    <tr md-row class="row-header">
+                                        <th md-column><span style="font-size: 20px;">Activo</span></th>
+                                        <th md-column><span style="font-size: 20px;">Nombre</span></th>
+                                        <th md-column><span style="font-size: 20px;">Descripción</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr md-row md-auto-select="true" class="row table-row" ng-click="settings.onRowClicked(sign, true)" md-row-select="true"
+                                        ng-repeat="sign in settings.vitalSigns">
+                                        <td md-cell>
+                                            <md-checkbox ng-click="settings.onRowClicked(sign, false); $event.stopPropagation();" ng-model="sign.active" aria-label="Checkbox 1"></md-checkbox>
+                                        </td>
+                                        <td md-cell>
+                                            {{sign.name}}
+                                        </td>
+                                        <td md-cell>
+                                            {{sign.description}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                    <!--</div>-->
+                </div>
+            </md-content>
+        </md-content>
+    </div>
+</md-conten>

@@ -47,3 +47,48 @@ overflow:hidden;
   margin-right: 10px;
   border-bottom: 1px solid #BDBDBD;
 }
+
+.side {
+  background-color: white;
+}
+
+.side-button {
+  height: 40px;
+  padding: 5px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.side-button:focus {
+    outline: none;
+}
+
+.side-button:hover {
+  background-color: #EEEEEE;
+}
+
+.side-button:active {
+  background-color: #E0E0E0;
+}
+
+.material-icons.side { 
+  color: #61c8b0 ; 
+}
+
+.selected { 
+  color: #E91E63 ; 
+}
+
+.active { 
+  color: #757575 ; 
+}
+
+// .reduced { 
+//   background-color: #E0E0E0 ; 
+// }
+
+.table-row:focus {
+    outline: none;
+}
